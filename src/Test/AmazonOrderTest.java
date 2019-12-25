@@ -31,20 +31,21 @@ public class AmazonOrderTest {
 		driver.findElement(By.xpath("//input[@value = 'Go']")).click();
 		Thread.sleep(3000);
 		
-		//drop-down menu
+		//Sort search button
 		driver.findElement(By.xpath("//span[@id='a-autoid-0-announce']")).click();
 		driver.findElement(By.xpath("//a[@id='s-result-sort-select_1']")).click();
 		Thread.sleep(2000);
 		
-		//Select dropdownMenu = new Select(driver.findElement(By.xpath("//span[@id='a-autoid-0-announce']")));
-		//dropdownMenu.deselectByVisibleText("Price: Low to High");
+		
 		
 		
 		//CheckBox --> search filters
-			
-		WebElement checkBox = driver.findElement(By.xpath("//i[@class = 'a-icon a-icon-checkbox']"));
-		//WebElement checkBox = driver.findElement(By.id("//div[@id='primeRefinements']"));
+		WebElement checkBox = driver.findElement(By.xpath("//i[@aria-label='Prime Eligible']"));
 		checkBox.click();
+		WebElement checkBox1 = driver.findElement(By.xpath("//li[@id='p_89/Perrier']"));
+		checkBox1.click();
+		
+		
 		Thread.sleep(5000);
 		driver.close();
 		
