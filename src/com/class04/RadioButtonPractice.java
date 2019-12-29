@@ -68,6 +68,8 @@ public class RadioButtonPractice extends CommonMethods {
 		
 		Thread.sleep(3000);
 		driver.close();
+		
+		
 	}
 
 }
