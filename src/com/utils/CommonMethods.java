@@ -23,7 +23,8 @@ public class CommonMethods {
 			System.setProperty("webdriver.gecko.driver", "/Users/natalia/eclipse-workspace/Selenium/drivers/geckodriver");
 			driver = new FirefoxDriver();
 			driver.get(url);
-			
+		}else {
+			System.err.println("Browser not supported");
 		}
 		
 	}
