@@ -37,5 +37,6 @@ public class MultiWindowsDemo extends CommonMethods {
 			
 			Thread.sleep(3000);
 			driver.close();
+			driver.quit();
 		}
 }
