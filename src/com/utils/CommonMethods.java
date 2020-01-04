@@ -2,7 +2,9 @@ package com.utils;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -33,6 +35,10 @@ public class CommonMethods {
 		
 	}
 	
+	
+	
+	
+	
 	/**
 	 * This methods accept and dismiss the alert
 	 * @throws will throw NoAlertPresentException if alert is not present
@@ -46,7 +52,7 @@ public class CommonMethods {
 			Alert alert = driver.switchTo().alert();
 			alert.accept();
 		}catch(NoAlertPresentException e) {
-			System.out.println("Alert is not present");
+			System.err.println("Alert is not present");
 		}
 	}
 	
@@ -58,11 +64,14 @@ public class CommonMethods {
 			Alert alert = driver.switchTo().alert();
 			alert.dismiss();
 		}catch(NoAlertPresentException e) {
-			System.out.println("Alert is not present");
+			System.err.println("Alert is not present");
 		}
 		
 	}	
 		
+	
+	
+	
 		/**
 		 * This method get a text from alert
 		 * @return text of the alert
@@ -77,9 +86,61 @@ public class CommonMethods {
 				Alert alert = driver.switchTo().alert();
 				text = alert.getText();
 			}catch(NoAlertPresentException e) {
-				System.out.println("Alert is not present");
+				System.err.println("Alert is not present");
 			}
 			return text;
+		}
+		
+		
+		
+		
+		/**
+		 * This methods with switch to the frame
+		 * @param nameOrId
+		 */
+		public static void switchToFrame(String nameOrId) {
+			
+			try {
+				driver.switchTo().frame(nameOrId);
+			}catch(NoSuchFrameException e) {
+				System.err.println("Frame is not present");
+			}
+			
+		}
+		
+		
+		
+		/**
+		 * This methods with switch to the frame
+		 * @param WebElement
+		 */
+		
+		public static void switchToFrame(WebElement element) {
+			
+			try {
+				driver.switchTo().frame(element);
+			}catch(NoSuchFrameException e) {
+				System.err.println("Frame is not present");
+			}
+			
+		}
+		
+		
+		
+		
+		/**
+		 * This methods with switch to the frame
+		 * @param index
+		 */
+		
+		public static void switchToFrame(int index) {
+			
+			try {
+				driver.switchTo().frame(index);
+			}catch(NoSuchFrameException e) {
+				System.err.println("Frame is not present");
+			}
+			
 		}
 		
 	

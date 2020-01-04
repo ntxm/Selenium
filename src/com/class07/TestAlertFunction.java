@@ -15,7 +15,7 @@ public class TestAlertFunction extends CommonMethods {
 		Thread.sleep(1000);
 		driver.findElement(By.linkText("Javascript Alerts")).click();
 		Thread.sleep(1000);
-		//driver.findElement(By.xpath("//button[@onclick='myAlertFunction()']")).click();
+		driver.findElement(By.xpath("//button[@onclick='myAlertFunction()']")).click();
 		Thread.sleep(1000);
 		
 	
