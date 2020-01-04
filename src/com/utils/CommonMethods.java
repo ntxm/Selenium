@@ -1,5 +1,7 @@
 package com.utils;
 
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -7,7 +9,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class CommonMethods {
 	
 	/**
+	 * Use this methods to open the browser and targer url
 	 * @param browser The desire 
+	 * @param url The desire url
 	 */
 	
 	public static WebDriver driver;
@@ -28,6 +32,56 @@ public class CommonMethods {
 		}
 		
 	}
+	
+	/**
+	 * This methods accept and dismiss the alert
+	 * @throws will throw NoAlertPresentException if alert is not present
+	 * 
+	 */
+	
+	
+	public static void acceptAlert() {
+		
+		try {
+			Alert alert = driver.switchTo().alert();
+			alert.accept();
+		}catch(NoAlertPresentException e) {
+			System.out.println("Alert is not present");
+		}
+	}
+	
+	
+	
+	public static void dismissAlert() {
+		
+		try {
+			Alert alert = driver.switchTo().alert();
+			alert.dismiss();
+		}catch(NoAlertPresentException e) {
+			System.out.println("Alert is not present");
+		}
+		
+	}	
+		
+		/**
+		 * This method get a text from alert
+		 * @return text of the alert
+		 * @throws will throw NoAlertPresentException if alert is not present
+		 */
+		
+		public static String getAlertText() {
+				
+			String text = null;
+			
+			try {
+				Alert alert = driver.switchTo().alert();
+				text = alert.getText();
+			}catch(NoAlertPresentException e) {
+				System.out.println("Alert is not present");
+			}
+			return text;
+		}
+		
 	
 //		public static WebDriver setUp(String browser) {
 //		
