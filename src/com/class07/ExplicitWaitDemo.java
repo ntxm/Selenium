@@ -21,7 +21,7 @@ public class ExplicitWaitDemo extends CommonMethods {
 		//Thread.sleep(1000);
 		driver.findElement(By.xpath("//button[@id='save']")).click();
 		
-		//WebDriver wait or explicit wait --> wait for specific element to appear on the
+		//WebDriver wait or explicit wait --> wait for specific element to appear on the page
 		//it will wait until expected condition is met or the specified time
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[starts-with(text(), 'First Name')]")));
@@ -32,6 +32,11 @@ public class ExplicitWaitDemo extends CommonMethods {
 		}else {
 			System.err.println("Failed");
 		}
+		
+		driver.close();
+		
+		
+		
 	}
 
 }
