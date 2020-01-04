@@ -1,5 +1,7 @@
 package com.utils;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchFrameException;
@@ -7,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
+//command+o --> to see all methods within the class
 public class CommonMethods {
 	
 	/**
@@ -23,15 +25,19 @@ public class CommonMethods {
 		if(browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", "/Users/natalia/eclipse-workspace/Selenium/drivers/chromedriver");
 			driver = new ChromeDriver();
-			driver.get(url);
 			
 		}else if(browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", "/Users/natalia/eclipse-workspace/Selenium/drivers/geckodriver");
 			driver = new FirefoxDriver();
-			driver.get(url);
+			
 		}else {
 			System.err.println("Browser not supported");
 		}
+		
+		driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.get(url);
 		
 	}
 	
@@ -40,7 +46,7 @@ public class CommonMethods {
 	
 	
 	/**
-	 * This methods accept and dismiss the alert
+	 * This methods accept the alert
 	 * @throws will throw NoAlertPresentException if alert is not present
 	 * 
 	 */
@@ -58,6 +64,12 @@ public class CommonMethods {
 	
 	
 	
+	/**
+	 * This methods dismiss the alert
+	 * @throws will throw NoAlertPresentException if alert is not present
+	 * 
+	 */
+	
 	public static void dismissAlert() {
 		
 		try {
@@ -68,7 +80,6 @@ public class CommonMethods {
 		}
 		
 	}	
-		
 	
 	
 	
@@ -98,6 +109,7 @@ public class CommonMethods {
 		 * This methods with switch to the frame
 		 * @param nameOrId
 		 */
+		
 		public static void switchToFrame(String nameOrId) {
 			
 			try {
