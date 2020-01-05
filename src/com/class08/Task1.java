@@ -39,6 +39,7 @@ public class Task1 extends CommonMethods {
 			List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table']/tbody/tr"));
 			System.out.println("Number of rows: " + rows.size());
 			
+			System.out.println();
 			System.out.println("===== HEADER TITLES =====");
 			
 			Iterator<WebElement> it = columns.iterator();
@@ -47,12 +48,31 @@ public class Task1 extends CommonMethods {
 				System.out.println(title);
 			}
 			
+			System.out.println();
 			System.out.println("===== Printing data =====");
 			
 			for(WebElement row: rows) {
 				System.out.println(row.getText());
 			}
 			
+			System.out.println();
+			System.out.println("===== Printing data cell by cell using advanced for loop =====");
+			List<WebElement> cells = driver.findElements(By.xpath("//table[@class='table']/tbody/tr/td"));
+			for(WebElement cell: cells) {
+				String cellData = cell.getText();
+				System.out.println(cellData);
+			}
+			
+			
+			System.out.println();
+			System.out.println("===== Printing data cell by cell using for loop =====");
+			for(int i=1; i<= rows.size(); i++) { //this loop controlling rows
+				for(int j = 1; j<= columns.size(); j++) {//this loop controlling columns
+					String text = driver.findElement(By.xpath("//table[@class='table']/tbody/tr["+ i +"]/td[" + j + "]")).getText();
+					System.out.println(text);
+				}
+			}
+				
 			
 			//Check actual end expected 
 			System.out.println();
@@ -62,9 +82,10 @@ public class Task1 extends CommonMethods {
 			}else {
 				System.err.println("Test failed: Columns: " + columns.size());
 				System.err.println("Test failed: Rows: " + rows.size());
-				
 				System.out.println("Expected columns: 4 and expected rows: 5");
 			}
+			
+			
 			
 			driver.close();
 	}
