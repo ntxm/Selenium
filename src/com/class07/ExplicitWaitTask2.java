@@ -10,14 +10,17 @@ import com.utils.CommonMethods;
 public class ExplicitWaitTask2 extends CommonMethods {
 
 	public static void main(String[] args) throws InterruptedException {
-		
+		//open browser, go to the right page
 		CommonMethods.setUp("chrome", "http://the-internet.herokuapp.com/");
 		driver.findElement(By.linkText("Dynamic Controls")).click();
 		
+		//find checkbox and click
 		WebElement checkBox = driver.findElement(By.xpath("//input[@label='blah']"));
+		//check condition
 		boolean isSelected = checkBox.isSelected();
 		
-		if(!isSelected) {
+		//if not selected --> select, if selected --> print message
+		if(!isSelected) { 
 			checkBox.click();
 		}else {
 			System.out.println("Checkbox selected");
