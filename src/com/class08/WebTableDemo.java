@@ -41,6 +41,9 @@ public class WebTableDemo extends CommonMethods {
 			String data = it.next().getText();
 			System.out.println(data);
 		}
+		
+		
+		driver.close();
 	}
 
 }
