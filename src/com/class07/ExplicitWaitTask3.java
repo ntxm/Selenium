@@ -19,19 +19,23 @@ public class ExplicitWaitTask3 extends CommonMethods {
 
 	public static void main(String[] args) throws InterruptedException {
 		
+		//navigate to the right page and click the button
 		CommonMethods.setUp("chrome", "https://the-internet.herokuapp.com");
 		driver.findElement(By.linkText("Dynamic Controls")).click();
 		driver.findElement(By.xpath("//button[@onclick='swapInput()']")).click();
 		
+		//wait until text element has been enable
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='text']")));
 				
-		
+		//Print "Hello"
 		driver.findElement(By.xpath("//input[@type='text']")).sendKeys("Hello");
 		driver.findElement(By.xpath("//button[@onclick='swapInput()']")).click();
 		
+		//get text from the element
 		String text = driver.findElement(By.xpath("//input[@type='text']")).getAttribute("value");
 		
+		//verify text is entered successfully
 		if(text.equals("Hello")) {
 			System.out.println("Test passed. Entered: " + text);
 		}else {
