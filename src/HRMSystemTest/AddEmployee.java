@@ -115,8 +115,8 @@ public class AddEmployee  extends CommonMethods {
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")).click();
 				break;
-				
-			}else if(i == rows.size()){
+			//need to fix	
+			}else{
 				driver.findElement(By.xpath("//a[text()='Next']")).click();
 			}
 		}
