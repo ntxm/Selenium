@@ -57,8 +57,8 @@ public class DynamicTableTask extends CommonMethods {
 	}	
 		
 		//loading page
-		//WebDriverWait wait = new WebDriverWait(driver, 30);
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_MainContent_fmwOrder_ddlProduct")));
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_MainContent_fmwOrder_ddlProduct")));
 		
 		//change the information 
 		driver.findElement(By.id("ctl00_MainContent_fmwOrder_txtName")).clear();
@@ -69,7 +69,7 @@ public class DynamicTableTask extends CommonMethods {
 		driver.findElement(By.id("ctl00_MainContent_fmwOrder_UpdateButton")).click();
 		
 		
-		//wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_MainContent_orderGrid")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("ctl00_MainContent_orderGrid")));
 		
 		//verify is name changed
 		List<WebElement> rowsUpdated = driver.findElements(By.xpath("//table[@id='ctl00_MainContent_orderGrid']/tbody/tr"));

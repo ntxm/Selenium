@@ -98,31 +98,33 @@ public class AddEmployee  extends CommonMethods {
 		
 		
 		//find Employee into the table
-		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='resultTable']//tbody/tr"));
-		System.out.println(rows.size());
-		
-		
-		for(int i = 0; i < rows.size(); i++) {
-			String findID = rows.get(i).getText();
+		System.out.println(passwordEmployeeID);
+		//need o fix
+		for(int i = 1; i < 100; i++) {
+			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='resultTable']//tbody/tr"));
+			System.out.println(rows.size());
+				
+				for(int j = 0; j < rows.size(); j++) {
+			String findID = rows.get(j).getText();
 			Thread.sleep(1000);
 			System.out.println(findID);
 			
 			if(findID.contains(passwordEmployeeID)) {
 				System.out.println("Found!");
-				WebElement checkBox = driver.findElement(By.xpath("//table[@id='resultTable']//tbody/tr[" + i + "]/td[1]"));
+				WebElement checkBox = driver.findElement(By.xpath("//table[@id='resultTable']//tbody/tr[" + (j+1) + "]/td[1]"));
 				checkBox.click();
 				driver.findElement(By.xpath("//input[@id='btnDelete']")).click();
 				Thread.sleep(1000);
 				driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")).click();
+				System.out.println("User " + loginFirstName + " " + loginLastName + " successfully deleted!");
 				break;
-			//need to fix	
-			}else{
+			} //end if
+		
+				}// j loop ended
+				
 				driver.findElement(By.xpath("//a[text()='Next']")).click();
-			}
-		}
-		
-		
-		
+				Thread.sleep(3000);
+		} // i loop ended	
 		
 		
 		//logout
