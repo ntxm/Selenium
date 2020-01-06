@@ -1,15 +1,21 @@
 package HRMSystemTest;
 /*
- *  Open chrome browser
+ *  TC 1: Create, Verify and Delete Employee
+ *	Open chrome browser
  *	Go to “http://166.62.36.207/humanresources/symfony/web/index.php/auth”
  *	Login into the application
  *	Add Employee
- *	Log out 
+ *	Verify Employee has been added
+ *	Go to Employee List
+ *	Delete added Employee
  *	Quit the browser
  */
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -55,7 +61,7 @@ public class AddEmployee  extends CommonMethods {
 		
 		//create new account for user
 		//Login --> FirstName + LastName
-		//Password --> FirstName + LastName + employee ID
+		//Password --> FirstName + LastName + employee ID + @@@
 		String loginFirstName = driver.findElement(By.xpath("//input[@id='firstName']")).getAttribute("value");
 		String loginLastName = driver.findElement(By.xpath("//input[@id='lastName']")).getAttribute("value");
 		String passwordEmployeeID = driver.findElement(By.xpath("//input[@id='employeeId']")).getAttribute("value");
@@ -74,16 +80,57 @@ public class AddEmployee  extends CommonMethods {
 		driver.findElement(By.id("btnSave")).click();
 		
 		
-		//wait. Page loading
+		//wait. Page loading. Redirect to the employee page
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("personal_txtEmpFirstName")));
+		
+		//verify that employee was created successfully with correct values
+		boolean checkEmployeeInfo = driver.findElement(By.xpath("//div[@id='profile-pic']/h1")).isDisplayed();
+		String actualName = driver.findElement(By.xpath("//div[@id='profile-pic']/h1")).getText();
+		
+		if(checkEmployeeInfo && actualName.equals(loginFirstName + " " + loginLastName)) {
+			System.out.println("Test passed! User successfully created. Value as excpected: " + actualName);
+		}else {
+			System.err.println("Test failed! User successfully created. Value NOT as excpected: " + actualName);
+		}
+		
+		//navigate to Employee List
+		driver.findElement(By.linkText("Employee List")).click();
+		
+		
+		//find Employee into the table
+		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='resultTable']//tbody/tr"));
+		System.out.println(rows.size());
+		
+		
+		for(int i = 0; i < rows.size(); i++) {
+			String findID = rows.get(i).getText();
+			Thread.sleep(1000);
+			System.out.println(findID);
+			
+			if(findID.contains(passwordEmployeeID)) {
+				System.out.println("Found!");
+				WebElement checkBox = driver.findElement(By.xpath("//table[@id='resultTable']//tbody/tr[" + i + "]/td[1]"));
+				checkBox.click();
+				driver.findElement(By.xpath("//input[@id='btnDelete']")).click();
+				Thread.sleep(1000);
+				driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")).click();
+				break;
 				
+			}else if(i == rows.size()){
+				driver.findElement(By.xpath("//a[text()='Next']")).click();
+			}
+		}
+		
+		
+		
+		
 		
 		//logout
-		driver.findElement(By.linkText("Welcome Admin")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.linkText("Logout")).click();
-		Thread.sleep(1000);
-		driver.quit();
+//		driver.findElement(By.linkText("Welcome Admin")).click();
+//		Thread.sleep(1000);
+//		driver.findElement(By.linkText("Logout")).click();
+//		Thread.sleep(1000);
+//		driver.quit();
 	
 	}
 

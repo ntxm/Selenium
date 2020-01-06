@@ -9,7 +9,8 @@ import com.utils.CommonMethods;
 import com.utils.Constants;
 
 /*
- * Login into WebOrders
+ * http://secure.smartbearsoftware.com/samples/testcomplete11/WebOrders/login.aspx
+ * Login into WebOrders (Tester test)
  * click checkbox next to Bob Feather
  */
 public class DynamicTableDemo extends CommonMethods {
@@ -23,7 +24,7 @@ public class DynamicTableDemo extends CommonMethods {
 		driver.findElement(By.id("ctl00_MainContent_password")).sendKeys("test");
 		driver.findElement(By.id("ctl00_MainContent_login_button")).click();
 		
-		
+		//find rows quantity
 		List<WebElement> rows = driver.findElements(By.xpath("//table[@id='ctl00_MainContent_orderGrid']//tbody/tr"));
 		System.out.println("Rows: " + rows.size());
 		
@@ -36,15 +37,10 @@ public class DynamicTableDemo extends CommonMethods {
 			 if(actualValue.contains(expectedValue)) {
 			 WebElement chkBox = driver.findElement(By.xpath("//table[@id='ctl00_MainContent_orderGrid']//tbody/tr[" + (i+1) + "]/td[1]"));
 			 chkBox.click();
-		   }else {
-			   System.out.println("Bob Feather not found");
-		   }
+			 }
 		}
 		
 		
-		//List<WebElement> columns = driver.findElements(By.xpath("//table[@id='ctl00_MainContent_orderGrid']//tbody/tr/td"));
 
-
-	}
-
+}
 }
