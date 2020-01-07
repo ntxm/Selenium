@@ -98,9 +98,10 @@ public class AddEmployee  extends CommonMethods {
 		
 		
 		//find Employee into the table
-		System.out.println(passwordEmployeeID);
-		//need o fix
-		for(int i = 1; i < 100; i++) {
+		// break needed
+		
+		
+		for(int i = 1; i < 3; i++) {
 			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='resultTable']//tbody/tr"));
 			System.out.println(rows.size());
 				
@@ -110,11 +111,11 @@ public class AddEmployee  extends CommonMethods {
 			System.out.println(findID);
 			
 			if(findID.contains(passwordEmployeeID)) {
-				System.out.println("Found!");
+				System.out.println("Row: " + (j+1) + " --> Found!");
 				WebElement checkBox = driver.findElement(By.xpath("//table[@id='resultTable']//tbody/tr[" + (j+1) + "]/td[1]"));
 				checkBox.click();
 				driver.findElement(By.xpath("//input[@id='btnDelete']")).click();
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")).click();
 				System.out.println("User " + loginFirstName + " " + loginLastName + " successfully deleted!");
 				break;
@@ -128,11 +129,11 @@ public class AddEmployee  extends CommonMethods {
 		
 		
 		//logout
-//		driver.findElement(By.linkText("Welcome Admin")).click();
-//		Thread.sleep(1000);
-//		driver.findElement(By.linkText("Logout")).click();
-//		Thread.sleep(1000);
-//		driver.quit();
+		driver.findElement(By.linkText("Welcome Admin")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.linkText("Logout")).click();
+		Thread.sleep(1000);
+		driver.quit();
 	
 	}
 
