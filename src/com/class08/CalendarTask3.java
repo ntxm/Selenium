@@ -51,13 +51,6 @@ public class CalendarTask3 extends CommonMethods {
 		//Select Month December		
 				WebElement dropdownMonthFrom = driver.findElement(By.xpath("//select[@class='ui-datepicker-month']"));
 				Select ddMenuFrom = new Select(dropdownMonthFrom);
-				List<WebElement> monthValueFrom = ddMenuFrom.getOptions();
-				
-				for(WebElement value: monthValueFrom) {
-					String month = value.getText();
-					System.out.println(month);
-				}
-				
 				ddMenuFrom.selectByVisibleText("Dec");
 				
 		//Select Year 2019
@@ -67,11 +60,16 @@ public class CalendarTask3 extends CommonMethods {
 				
 		//Select date 1st				
 				
-				driver.findElement(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[1]/td[7]")).click();
+			List<WebElement> dates =driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td"));
+			for(WebElement date: dates) {
+				if(date.getText().equals("1")) {
+					date.click();
+				}
+			}
 				
 		
 				
-				
+
 				
 		//TO DATE. Click on the calendar icon and pick a date
 				driver.findElement(By.xpath("//li[2]//img[@class='ui-datepicker-trigger']")).click();
@@ -80,13 +78,6 @@ public class CalendarTask3 extends CommonMethods {
 		//Select Month January		
 				WebElement dropdownMonthTo = driver.findElement(By.xpath("//select[@class='ui-datepicker-month']"));
 				Select ddMenuTo = new Select(dropdownMonthTo);
-				List<WebElement> monthValueTo = ddMenuTo.getOptions();
-				
-				for(WebElement value: monthValueTo) {
-					String monthTo = value.getText();
-					System.out.println(monthTo);
-				}
-				
 				ddMenuTo.selectByVisibleText("Jan");
 				
 		//Select Year 2020
@@ -96,7 +87,12 @@ public class CalendarTask3 extends CommonMethods {
 				
 		//Select date 31st				
 				
-				driver.findElement(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr[5]/td[5]")).click();
+				List <WebElement> datesTo = driver.findElements(By.xpath("//table[@class='ui-datepicker-calendar']/tbody/tr/td"));
+				for(WebElement dateTo: datesTo) {
+					if(dateTo.getText().equals("31")) {
+						dateTo.click();
+					}
+				}
 		
 		//Check only Pending approval
 				List<WebElement> checkboxes = driver.findElements(By.xpath("//input[@type='checkbox']"));
@@ -109,8 +105,6 @@ public class CalendarTask3 extends CommonMethods {
 						if(isCheckboxSelected) {
 							if(value.equals("1")) {
 								System.out.println("Checkbox \"Pending Approval\" selected");
-						}else {
-							System.err.println("Failed! Wrong checkbox selected");
 						}
 						
 						}
@@ -121,14 +115,14 @@ public class CalendarTask3 extends CommonMethods {
 				wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("resultTable")));
 				
 		//Validate “No Records Found” is displayed
-				
+				String expectedResult = "No Records Found";
 				String result = driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr")).getText();
-				if(result.contains("No Records Found")) {
+				if(result.contains(expectedResult)) {
 					System.out.println("No Records Found");
 					System.out.println("Test Passed!");
 				}
 				
-				Thread.sleep(3000);
+				Thread.sleep(6000);
 				driver.quit();
 				
 
