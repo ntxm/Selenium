@@ -46,7 +46,7 @@ public class CalendarTask3 extends CommonMethods {
 				driver.findElement(By.linkText("Leave List")).click();
 				Thread.sleep(1000);
 				
-		//from date. Click on the calendar icon and pick a date
+		//FROM DATE. Click on the calendar icon and pick a date
 				driver.findElement(By.xpath("//li[1]//img[@class='ui-datepicker-trigger']")).click();
 		//Select Month December		
 				WebElement dropdownMonthFrom = driver.findElement(By.xpath("//select[@class='ui-datepicker-month']"));
@@ -73,7 +73,7 @@ public class CalendarTask3 extends CommonMethods {
 				
 				
 				
-		//to date. Click on the calendar icon and pick a date
+		//TO DATE. Click on the calendar icon and pick a date
 				driver.findElement(By.xpath("//li[2]//img[@class='ui-datepicker-trigger']")).click();
 				Thread.sleep(1000);
 		
@@ -83,8 +83,8 @@ public class CalendarTask3 extends CommonMethods {
 				List<WebElement> monthValueTo = ddMenuTo.getOptions();
 				
 				for(WebElement value: monthValueTo) {
-					String month2 = value.getText();
-					System.out.println(month2);
+					String monthTo = value.getText();
+					System.out.println(monthTo);
 				}
 				
 				ddMenuTo.selectByVisibleText("Jan");
