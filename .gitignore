@@ -1,0 +1,5 @@
+#no screenshots 
+screenshots/
+
+#no specific files
+.DS_Store
