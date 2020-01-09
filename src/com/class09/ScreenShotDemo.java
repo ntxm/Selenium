@@ -36,9 +36,14 @@ public class ScreenShotDemo extends CommonMethods {
 			System.out.println("Test Fail");
 		}
 		
+		//how to take a screenshot
+		//We can use screenshot interface
+		//step1: downcast webdriver to the type of takeScreenshot
 		TakesScreenshot screen = (TakesScreenshot)driver;
+		//call method getScreenshotAs and specify output type
 		File screenshot01 = screen.getScreenshotAs(OutputType.FILE);
 		try {
+			//copy file to the specified destination and give name and extension
 			FileUtils.copyFile(screenshot01, new File("screenshots/HRMS/AdminLogin.png"));
 		} catch (IOException e) {
 			
