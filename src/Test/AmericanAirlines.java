@@ -100,6 +100,7 @@ public class AmericanAirlines extends CommonMethods {
 			String actualDate = date.getText();
 				if(actualDate.equals(expectedDayArrival)) {
 					date.click();
+					break;
 				}
 		}
 		
@@ -115,7 +116,11 @@ public class AmericanAirlines extends CommonMethods {
 			e.printStackTrace();
 		}
 		
+		//Search button
+		driver.findElement(By.xpath("//input[@id='flightSearchForm.button.reSubmit']")).click();
 		
+		Thread.sleep(2000);
+		driver.quit();
 				
 	}
 }
