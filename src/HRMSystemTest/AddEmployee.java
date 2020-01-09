@@ -12,6 +12,7 @@ package HRMSystemTest;
  */
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -99,36 +100,45 @@ public class AddEmployee  extends CommonMethods {
 		
 		//find Employee into the table
 		// break needed
+
+		boolean isFound = false;
 		
-		
-		for(int i = 1; i < 3; i++) {
-			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='resultTable']//tbody/tr"));
-			System.out.println(rows.size());
-				
-				for(int j = 0; j < rows.size(); j++) {
-			String findID = rows.get(j).getText();
-			Thread.sleep(1000);
-			System.out.println(findID);
+		//while employee not found, do this loop:
+		while(!isFound) {
 			
-			if(findID.contains(passwordEmployeeID)) {
-				System.out.println("Row: " + (j+1) + " --> Found!");
-				WebElement checkBox = driver.findElement(By.xpath("//table[@id='resultTable']//tbody/tr[" + (j+1) + "]/td[1]"));
-				checkBox.click();
-				driver.findElement(By.xpath("//input[@id='btnDelete']")).click();
-				Thread.sleep(2000);
-				driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")).click();
-				System.out.println("User " + loginFirstName + " " + loginLastName + " successfully deleted!");
+			List<WebElement> rows = driver.findElements(By.xpath("//table[@id='resultTable']//tbody/tr"));
+			System.out.println("Total rows: " + rows.size());
+			
+		for(int i = 0; i < rows.size(); i++) {
+			String rowData = rows.get(i).getText();
+			Thread.sleep(1000);
+			System.out.println(rowData);
+			
+			if(rowData.contains(passwordEmployeeID)) {
+				isFound = true;
+				driver.findElement(By.xpath("//table[@id='resultTable']/tbody/tr["+ (i+1) + "]/td[1]")).click();
+				Thread.sleep(1000);
+				driver.findElement(By.id("btnDelete")).click();
+				Thread.sleep(1000);
+				driver.findElement(By.id("dialogDeleteBtn")).click();
+				System.out.println("Found! Employee " + loginFirstName + " " + loginLastName + " ID: " + passwordEmployeeID + " successfully deleted!");
 				break;
 			} //end if
-		
-				}// j loop ended
 				
-				driver.findElement(By.xpath("//a[text()='Next']")).click();
-				Thread.sleep(2000);
-		} // i loop ended	
+		}//end for
 		
+		try {
+			driver.findElement(By.xpath("//a[text()='Next']")).click();
+		}catch(Exception ex) {
+			System.out.println("Step skipped because only one page of table");
+		}
+		
+		}//end while	
+		
+	
 		
 		//logout
+		Thread.sleep(2000);
 		driver.findElement(By.linkText("Welcome Admin")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.linkText("Logout")).click();
