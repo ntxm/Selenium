@@ -45,6 +45,12 @@ public class ActionsClassDemo extends CommonMethods{
 		//act.moveToElement(addEmp).click().perform(); --> 1st way
 		act.click(addEmp).perform();
 		
+		//act.keyUp(Keys.SHIFT).sendKeys("hello") --> if you perform this on txt box
+		//if will hold shift key and type hello in upper case
+		
+		
+		
+		
 		Thread.sleep(3000);
 		driver.quit();
 	}
