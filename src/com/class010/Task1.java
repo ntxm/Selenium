@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import com.utils.CommonMethods;
-import com.utils.Constants;
+
 
 public class Task1  extends CommonMethods {
 
@@ -38,6 +38,8 @@ public class Task1  extends CommonMethods {
 				System.out.println("Element not dropped.");
 			}
 			
+			Thread.sleep(3000);
+			driver.quit();
 	}
 
 }
