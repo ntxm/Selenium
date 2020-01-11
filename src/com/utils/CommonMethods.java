@@ -3,12 +3,15 @@ package com.utils;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.class05.JavaScriptAlertVerification;
 //command+o --> to see all methods within the class
 public class CommonMethods {
 	
@@ -50,7 +53,6 @@ public class CommonMethods {
 	 * @throws will throw NoAlertPresentException if alert is not present
 	 * 
 	 */
-	
 	
 	public static void acceptAlert() {
 		
@@ -155,7 +157,68 @@ public class CommonMethods {
 			
 		}
 		
-	
+		
+		/**
+		 * This method click on the element using JSExecutor
+		 * @param element
+		 */
+		
+		public static void jsClick(WebElement element) {
+			
+			JavascriptExecutor js =	(JavascriptExecutor)driver;
+			js.executeScript("arguments[0].click();", element);
+		}
+		
+		
+		/**
+		 * This method scroll page until specified element
+		 * @param element
+		 */
+		
+		public static void scrollIntoElement(WebElement element) {
+			
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("arguments[0].scrollIntoView(true);", element);
+		}
+		
+		
+		/**
+		 * This method scroll page down 
+		 * @param pixel
+		 */
+		
+		public static void scrollDown(int pixel) {
+			
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("window.scrollBy(0," + pixel + ")");
+		}
+		
+		
+		/**
+		 * This method scroll page up
+		 * @param pixel
+		 */
+		
+		public static void scrollUp(int pixel) {
+			
+			JavascriptExecutor js = (JavascriptExecutor)driver;
+			js.executeScript("window.scrollBy(0,-" + pixel + ")");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		public static WebDriver setUp(String browser) {
 //		
 //		if(browser.equalsIgnoreCase("chrome")) {
