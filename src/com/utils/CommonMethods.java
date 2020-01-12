@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.class05.JavaScriptAlertVerification;
 //command+o --> to see all methods within the class
 public class CommonMethods {
 	
